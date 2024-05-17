@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import assets from "@/assets";
 import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -20,6 +20,13 @@ import { useRouter } from "next/navigation";
 import { storeUserInfo } from "@/services/actions/auth.services";
 import PHForm from "@/components/Form/PHForm";
 import PHInput from "@/components/Form/PHInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+export const validationSchema = z.object({
+  email: z.string().email("Please enter a valid email address!"),
+  password: z.string().min(6, "Must be at least 6 characters"),
+});
 
 export type FormValues = {
   email: string;
@@ -27,14 +34,17 @@ export type FormValues = {
 };
 const LoginPage = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
 
-  const handleLogin = async (values:FieldValues) => {
+  const handleLogin = async (values: FieldValues) => {
     try {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
         router.push("/");
+      } else {
+        setError(res?.message);
       }
     } catch (err) {
       console.log(err);
@@ -70,25 +80,30 @@ const LoginPage = () => {
               </Typography>
             </Box>
           </Stack>
-          <PHForm onSubmit={handleLogin}>
+          {error && (
+            <Box>
+              <Typography color="red">User not Exist!!</Typography>
+            </Box>
+          )}
+          <PHForm
+            onSubmit={handleLogin}
+            resolver={zodResolver(validationSchema)}
+            defaultValues={{
+              email: "",
+              password: "",
+            }}
+          >
             <Box sx={{ marginTop: "10px" }}>
               <Grid container spacing={3} my="2">
                 <Grid item md={6}>
-                  <PHInput
-                    label="Email"
-                    fullWidth={true}
-                    name="email"
-                    required={true}
-                    
-                  />
+                  <PHInput label="Email" fullWidth={true} name="email" />
                 </Grid>
                 <Grid item md={6}>
                   <PHInput
                     type="Password"
                     label="Password"
                     fullWidth={true}
-                    name='password'
-                    required={true}
+                    name="password"
                   />
                 </Grid>
               </Grid>

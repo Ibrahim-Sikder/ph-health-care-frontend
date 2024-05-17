@@ -12,7 +12,7 @@ type  TInputProps = {
     type?:string,
     sx?:SxProps,
     placeholder?:string,
-    required: boolean,
+    required?: boolean,
 }
 
 const PHInput = ({ name, label , type ='text', variant, size='small', fullWidth, placeholder, required, sx }:TInputProps) => {
@@ -21,7 +21,7 @@ const PHInput = ({ name, label , type ='text', variant, size='small', fullWidth,
     <Controller
       control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field, fieldState:{error} }) => (
       <TextField
       {...field}
       label={label}
@@ -32,6 +32,8 @@ const PHInput = ({ name, label , type ='text', variant, size='small', fullWidth,
       variant='outlined'
       size={size}
       fullWidth={fullWidth}
+      error={!!error?.message}
+      helperText={error?.message}
       />
     )}
     />
