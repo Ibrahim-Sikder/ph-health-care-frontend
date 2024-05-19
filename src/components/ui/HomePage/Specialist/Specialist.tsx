@@ -1,15 +1,13 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
-
 const Specialist = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/specialties", {
-    next: {
-      revalidate: 30,
-    },
+  const res = await fetch("http://localhost:5000/api/v1/specialties",{
+    next:{
+      revalidate: 30
+    }
   });
   const { data: specialties } = await res.json();
-  console.log(specialties);
+  console.log(specialties)
   return (
     <Container>
       <Box sx={{ margin: "25px 0", textAlign: "center" }}>
@@ -22,7 +20,7 @@ const Specialist = async () => {
           </Typography>
         </Box>
         <Stack direction="row" gap={4} mt={5}>
-          {specialties.map((specialty: any) => (
+          {specialties?.slice(0,6)?.map((specialty: any) => (
             <Box
               key={specialty._id}
               sx={{
@@ -45,19 +43,27 @@ const Specialist = async () => {
                 },
               }}
             >
-              <Image src={specialty.icon} width="100" height="100" alt="icon" />
+             {
+              specialty?.icon &&  <Image src={specialty.icon} width="100" height="100" alt="icon" />
+             }
 
               <Box>
-                <Typography variant="p" fontWeight={600} mt={2}>
+                <Typography fontWeight={600} mt={2}>
                   {specialty.title}
                 </Typography>
               </Box>
             </Box>
           ))}
         </Stack>
-        <Button variant="outlined" sx={{
-          marginTop:'15px'
-        }}> View All </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            marginTop: "15px",
+          }}
+        >
+          {" "}
+          View All{" "}
+        </Button>
       </Box>
     </Container>
   );

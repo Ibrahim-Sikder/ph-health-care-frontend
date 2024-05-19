@@ -1,14 +1,10 @@
-"use client";
+'use client'
 
 import AuthButton from "@/components/ui/HomePage/AuthButton/AuthButton";
 import {
-  getUserInfo,
-  isLoggedIn,
-  removeUser,
 } from "@/services/actions/auth.services";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 const Header = () => {
@@ -46,8 +42,8 @@ const Header = () => {
           <Typography component={Link} href="/login">
             Consultation
           </Typography>
-          <AuthButton/>
         </Stack>
+          <AuthButton/>
       </Stack>
     </Container>
   );

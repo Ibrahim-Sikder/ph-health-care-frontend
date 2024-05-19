@@ -1,3 +1,5 @@
+
+
 import {
   Box,
   Button,
@@ -18,7 +20,7 @@ const TopRatedDoctors = async () => {
     "http://localhost:5000/api/v1/doctor?page=1&limit=10"
   );
   const { data: doctors } = await res.json();
-  console.log(doctors);
+
   return (
     <Box
       sx={{
@@ -40,7 +42,7 @@ const TopRatedDoctors = async () => {
         </Typography>
         <Container sx={{ margin: "30px auto " }}>
           <Grid container spacing={2}>
-            {doctors.map((doctor: any) => (
+            {doctors?.map((doctor: any) => (
               <Grid item key={doctor._id} md={4}>
                 <Card>
                   <Box>
