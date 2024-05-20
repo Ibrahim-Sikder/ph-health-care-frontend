@@ -6,8 +6,13 @@ import { Button } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+interface UserInfo {
+  userId: string;
+  // Add other properties here if needed
+}
+
 const AuthButton = () => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +32,7 @@ const AuthButton = () => {
 
   return (
     <>
-      {userInfo?.userId ? (
+      {userInfo.userId ? (
         <Button onClick={handleLogout} color="error">
           Log Out
         </Button>
