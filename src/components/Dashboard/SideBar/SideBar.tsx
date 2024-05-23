@@ -9,11 +9,14 @@ import { UserRole } from "@/types";
 import SideBarItems from "./SideBarItems";
 import { getUserInfo } from "@/services/actions/auth.services";
 const SideBar = () => {
-  const [userRole, setUserRole] = useState('')
-  useEffect(()=>{
-    const {role} = getUserInfo() as any
-    setUserRole(role)
-  },[])
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    const { role } = getUserInfo() as any;
+    setUserRole(role);
+  }, []);
+
+  
   return (
     <Box>
       <Stack

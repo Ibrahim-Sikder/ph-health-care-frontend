@@ -1,11 +1,10 @@
-import React from 'react';
 
-const DoctorPage = () => {
-    return (
-        <div>
-            <h4>doctor dashboard</h4>
-        </div>
-    );
+const page = () => {
+  return (
+    <div>
+      <h3>dashboard home page </h3>
+    </div>
+  );
 };
 
-export default DoctorPage;
+export default page;

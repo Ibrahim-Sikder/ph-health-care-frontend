@@ -5,34 +5,26 @@ import { getUserInfo, removeUser } from '@/services/actions/auth.services';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { deleteCookies } from '@/services/actions/deleteCookies';
+import { authKey } from '@/constant/authkey';
+import { logoutUser } from '@/services/actions/logoutUser';
 
-interface UserInfo {
-  userId: string;
-  // Add other properties here if needed
-}
+
 
 const AuthButton = () => {
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const userInfo = getUserInfo()
   const router = useRouter();
 
-  useEffect(() => {
-    const info = getUserInfo();
-    setUserInfo(info);
-  }, []);
 
   const handleLogout = () => {
-    removeUser();
-    setUserInfo(null);
-    router.refresh();
+    logoutUser(router)
   };
 
-  if (userInfo === null) {
-    return null; // Or a loading spinner
-  }
+ 
 
   return (
     <>
-      {userInfo.userId ? (
+      {userInfo?.userId ? (
         <Button onClick={handleLogout} color="error">
           Log Out
         </Button>

@@ -18,9 +18,9 @@ const SpecialTyModal = ({ open, setOpen }: TProps) => {
   const [createSpecialty] = useCreateSpecialtyMutation();
 
   const handleFormSubmit = async (values: FieldValues) => {
-    console.log(values)
+ 
     const data = modifyPayload(values);
-    console.log(data);
+ 
     try {
       const res = await createSpecialty(data).unwrap();
       console.log(res);
@@ -30,6 +30,7 @@ const SpecialTyModal = ({ open, setOpen }: TProps) => {
       }
     } catch (err) {
       console.error("Error creating specialty:", err);
+      console.log(err)
     }
   };
 

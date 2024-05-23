@@ -29,7 +29,7 @@ const Specialties = () => {
       if (res.id) {
         toast.success("Specialty delete successfully !");
       }
-      console.log(res);
+
     } catch (err) {
       console.log(err);
     }

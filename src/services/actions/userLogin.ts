@@ -1,8 +1,8 @@
-'use server'
+// 'use server'
 
-import { FormValues } from "@/app/login/page"
 import { cache } from "react"
 import { FieldValues } from "react-hook-form"
+import { setAccessToken } from "./setAccessToken"
 
 
 export const userLogin = async(data:FieldValues)=>{
@@ -12,10 +12,19 @@ export const userLogin = async(data:FieldValues)=>{
             "Content-type": "application/json"
         },
         body: JSON.stringify(data),
-        cache: 'no-store'
+        // cache: 'no-store'
+        credentials: 'include'
     })
-    const userLogin = await res.json();
-    return userLogin;
+    const userInfo = await res.json();
+
+    if(userInfo.data.accessToken){
+        setAccessToken(userInfo.data.accessToken,{
+            redirect: '/dashboard'
+        })
+    }
+
+
+    return userInfo;
 
 
 

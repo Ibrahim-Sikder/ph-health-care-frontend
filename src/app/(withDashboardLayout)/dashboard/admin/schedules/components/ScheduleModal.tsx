@@ -19,6 +19,7 @@ const ScheduleModal = ({ open, setOpen }: TProps) => {
 
 
   const handleFormSubmit = async (values: FieldValues) => {
+
     values.startDate = dateFormatter(values.startDate);
     values.endDate = dateFormatter(values.endDate);
     values.startTime = timeFormatter(values.startTime);
@@ -26,8 +27,8 @@ const ScheduleModal = ({ open, setOpen }: TProps) => {
 
     try {
       const res = await createSchedule(values).unwrap();
-      // console.log(res);
-      if (res?.length) {
+ 
+      if (res?.id) {
         toast.success("Schedules created successfully!");
         setOpen(false);
       }

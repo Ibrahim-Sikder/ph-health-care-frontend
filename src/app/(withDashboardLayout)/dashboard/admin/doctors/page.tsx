@@ -8,12 +8,16 @@ import {
   useGetAllDoctorsQuery,
 } from "@/redux/api/doctorApi";
 import { toast } from "sonner";
+import EditIcon from "@mui/icons-material/Edit";
+import Edit from "@mui/icons-material/Edit";
+import Link from "next/link";
+
 const AdminDoctor = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>();
-  console.log(searchTerm);
-  query['searchTerm'] = searchTerm
+ 
+  query["searchTerm"] = searchTerm;
 
   const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
   const [deleteDoctor] = useDeleteDoctorMutation();
@@ -47,15 +51,25 @@ const AdminDoctor = () => {
     { field: "apointmentFee", headerName: "Appointment Fee ", flex: 1 },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Action" ,
       flex: 1,
       headerAlign: "center",
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <IconButton onClick={() => handleDelete(row.id)} aria-label="delete">
-            <GridDeleteIcon />
-          </IconButton>
+          <Box>
+            <IconButton
+              onClick={() => handleDelete(row.id)}
+              aria-label="delete"
+            >
+              <GridDeleteIcon />
+            </IconButton>
+            <Link href={`/dashboard/admin/doctors/edit/${row.id}`}>
+              <IconButton>
+                <Edit />
+              </IconButton>
+            </Link>
+          </Box>
         );
       },
     },
