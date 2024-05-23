@@ -79,7 +79,7 @@ const TopRatedDoctors = async () => {
             ))}
           </Grid>
           <Box sx={{textAlign:'center', marginTop:'20px'}}>
-          <Button component={Link} href='/doctor' variant="outlined">View All </Button>
+          <Button component={Link} href='/doctors' variant="outlined">View All </Button>
           </Box>
         </Container>
       </Box>

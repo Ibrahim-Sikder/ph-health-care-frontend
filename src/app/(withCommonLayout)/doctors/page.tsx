@@ -10,6 +10,7 @@ interface PropType {
 }
 
 const Doctors = async ({ searchParams }: PropType) => {
+  console.log(searchParams)
   let res;
 
   if (searchParams.specialties) {
