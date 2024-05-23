@@ -1,14 +1,22 @@
-'use client'
+"use client";
 
 import AuthButton from "@/components/ui/HomePage/AuthButton/AuthButton";
-import {
-} from "@/services/actions/auth.services";
+import useUserInfo from "@/hooks/useUserInfo";
+import {} from "@/services/actions/auth.services";
+import { logoutUser } from "@/services/actions/logoutUser";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Header = () => {
- 
+  const router = useRouter();
+  const userInfo = useUserInfo();
+
+  const handleLogOut = () => {
+    logoutUser(router);
+  };
+
   return (
     <Container>
       <Stack
@@ -42,8 +50,17 @@ const Header = () => {
           <Typography component={Link} href="/login">
             Consultation
           </Typography>
+          {userInfo?.userId ? (
+            <Button color="error" onClick={handleLogOut} sx={{ boxShadow: 0 }}>
+              Logout
+            </Button>
+          ) : (
+            <Button component={Link} href="/login">
+              Login
+            </Button>
+          )}
         </Stack>
-          <AuthButton/>
+        {/* <AuthButton /> */}
       </Stack>
     </Container>
   );
