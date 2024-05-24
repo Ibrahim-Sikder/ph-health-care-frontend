@@ -7,6 +7,7 @@ const VideoCalling = ({
 }: {
    searchParams: { videoCallingId: string };
 }) => {
+   console.log(searchParams)
    const videoCallingId = searchParams.videoCallingId;
 
    return <VideoCall videoCallingId={videoCallingId} />;

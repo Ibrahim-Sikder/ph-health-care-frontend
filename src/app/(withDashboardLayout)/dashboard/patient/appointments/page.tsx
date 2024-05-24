@@ -11,6 +11,7 @@ import PhChips from '@/components/Shared/PhChip/PhChips';
 
 const PatientAppointmentsPage = () => {
    const { data, isLoading } = useGetMyAppointmentsQuery({});
+   console.log(data)
    const appointments = data?.appointments;
    const meta = data?.meta;
 
@@ -69,7 +70,7 @@ const PatientAppointmentsPage = () => {
                <IconButton
                   component={Link}
                   href={`/video?videoCallingId=${row?.videoCallingId}`}
-                  disabled={row?.paymentStatus === 'UNPAID'}
+                  // disabled={row?.paymentStatus === 'UNPAID'}
                >
                   <VideocamIcon
                      sx={{

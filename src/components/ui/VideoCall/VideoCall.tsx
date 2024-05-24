@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const VideoCall = ({ videoCallingId }: { videoCallingId: string }) => {
    const [startVideoCall, setStartVideoCall] = useState(false);
+   console.log(startVideoCall)
 
    const router = useRouter();
 
