@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useGetAllSpecialtiesQuery } from '@/redux/api/specialistApi';
 
 const ScrollCategory = ({ specialties }: { specialties: string }) => {
+   console.log(specialties)
    const { data } = useGetAllSpecialtiesQuery(undefined);
    const [value, setValue] = React.useState(specialties || '');
    const router = useRouter();
