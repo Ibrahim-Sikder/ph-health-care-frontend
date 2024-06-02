@@ -16,116 +16,125 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { USER_ROLE } from '@/constant/role';
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
-   const roleMenus: DrawerItem[] = [];
+  const roleMenus: DrawerItem[] = [];
 
-   const defaultMenus = [
-      {
-         title: 'Profile',
-         path: `${role}/profile`,
-         icon: PersonIcon,
-      },
-      {
-         title: 'Change Password',
-         path: `change-password`,
-         icon: KeyIcon,
-      },
-   ];
+  const defaultMenus = [
+    {
+      title: 'Profile',
+      path: `${role}/profile`,
+      icon: PersonIcon,
+    },
+    {
+      title: 'Change Password',
+      path: `change-password`,
+      icon: KeyIcon,
+    },
+  ];
 
-   switch (role) {
-      case USER_ROLE.SUPER_ADMIN:
-         roleMenus.push(
-            {
-               title: 'Dashboard',
-               path: `${role}`,
-               icon: DashboardIcon,
-            },
-            {
-               title: 'Manage Users',
-               path: `${role}/manage-users`,
-               icon: GroupIcon,
-            }
-         );
-         break;
+  switch (role) {
+    case USER_ROLE.SUPER_ADMIN:
+      roleMenus.push(
+        {
+          title: 'Dashboard',
+          path: `${role}`,
+          icon: DashboardIcon,
+        },
+        {
+          title: 'Manage Users',
+          path: `${role}/manage-users`,
+          icon: GroupIcon,
+        }
+      );
+      break;
 
-      case USER_ROLE.ADMIN:
-         roleMenus.push(
+    case USER_ROLE.ADMIN:
+      roleMenus.push(
+        {
+          title: 'Dashboard',
+          path: `${role}`,
+          icon: DashboardIcon,
+        },
+        {
+          title: 'Specialties',
+          path: `${role}/specialties`,
+          icon: TryIcon,
+          children: [
             {
-               title: 'Dashboard',
-               path: `${role}`,
-               icon: DashboardIcon,
+              title: 'Add Specialties',
+              path: `${role}/specialties/add`,
             },
             {
-               title: 'Specialties',
-               path: `${role}/specialties`,
-               icon: TryIcon,
+              title: 'View Specialties',
+              path: `${role}/specialties/view`,
             },
-            
-            {
-               title: 'Doctors',
-               path: `${role}/doctors`,
-               icon: MedicalInformationIcon,
-            },
-            {
-               title: 'Schedules',
-               path: `${role}/schedules`,
-               icon: CalendarMonthIcon,
-            },
-            {
-               title: 'Appointments',
-               path: `${role}/appointments`,
-               icon: BookOnlineIcon,
-            },
-            {
-               title: 'Reviews',
-               path: `${role}/reviews`,
-               icon: ReviewsIcon,
-            }
-         );
-         break;
+          ],
+        },
+        {
+          title: 'Doctors',
+          path: `${role}/doctors`,
+          icon: MedicalInformationIcon,
+        },
+        {
+          title: 'Schedules',
+          path: `${role}/schedules`,
+          icon: CalendarMonthIcon,
+        },
+        {
+          title: 'Appointments',
+          path: `${role}/appointments`,
+          icon: BookOnlineIcon,
+        },
+        {
+          title: 'Reviews',
+          path: `${role}/reviews`,
+          icon: ReviewsIcon,
+        }
+      );
+      break;
 
-      case USER_ROLE.DOCTOR:
-         roleMenus.push(
-            {
-               title: 'Dashboard',
-               path: `${role}`,
-               icon: DashboardIcon,
-            },
-            {
-               title: 'Schedules',
-               path: `${role}/schedules`,
-               icon: CalendarMonthIcon,
-            },
-            {
-               title: 'Appointments',
-               path: `${role}/appointment`,
-               icon: BookOnlineIcon,
-            }
-         );
-         break;
+    case USER_ROLE.DOCTOR:
+      roleMenus.push(
+        {
+          title: 'Dashboard',
+          path: `${role}`,
+          icon: DashboardIcon,
+        },
+        {
+          title: 'Schedules',
+          path: `${role}/schedules`,
+          icon: CalendarMonthIcon,
+        },
+        {
+          title: 'Appointments',
+          path: `${role}/appointment`,
+          icon: BookOnlineIcon,
+        }
+      );
+      break;
 
-      case USER_ROLE.PATIENT:
-         roleMenus.push(
-            {
-               title: 'Appointments',
-               path: `${role}/appointments`,
-               icon: BookOnlineIcon,
-            },
-            {
-               title: 'Prescriptions',
-               path: `${role}/prescriptions`,
-               icon: ReceiptLongIcon,
-            },
-            {
-               title: 'Payment History',
-               path: `${role}/payment-history`,
-               icon: AttachMoneyIcon,
-            }
-         );
-         break;
+    case USER_ROLE.PATIENT:
+      roleMenus.push(
+        {
+          title: 'Appointments',
+          path: `${role}/appointments`,
+          icon: BookOnlineIcon,
+        },
+        {
+          title: 'Prescriptions',
+          path: `${role}/prescriptions`,
+          icon: ReceiptLongIcon,
+        },
+        {
+          title: 'Payment History',
+          path: `${role}/payment-history`,
+          icon: AttachMoneyIcon,
+        }
+      );
+      break;
 
-      default:
-         break;
-   }
+    default:
+      break;
+  }
 
-   return [...roleMenus, ...defaultMenus];
+  return [...roleMenus, ...defaultMenus];
 };

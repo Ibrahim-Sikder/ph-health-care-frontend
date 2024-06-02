@@ -8,6 +8,7 @@ import { drawerItems } from "@/utils/drawerItems";
 import { UserRole } from "@/types";
 import SideBarItems from "./SideBarItems";
 import { getUserInfo } from "@/services/actions/auth.services";
+
 const SideBar = () => {
   const [userRole, setUserRole] = useState("");
 
@@ -16,7 +17,6 @@ const SideBar = () => {
     setUserRole(role);
   }, []);
 
-  
   return (
     <Box>
       <Stack
