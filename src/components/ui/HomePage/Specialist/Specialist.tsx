@@ -1,10 +1,11 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 const Specialist = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/specialties",{
-    next:{
-      revalidate: 30
-    }
+  const res = await fetch("http://localhost:5000/api/v1/specialties", {
+    next: {
+      revalidate: 30,
+    },
   });
   const { data: specialties } = await res.json();
 
@@ -20,7 +21,7 @@ const Specialist = async () => {
           </Typography>
         </Box>
         <Stack direction="row" gap={4} mt={5}>
-          {specialties?.slice(0,6)?.map((specialty: any) => (
+          {specialties?.slice(0, 6)?.map((specialty: any) => (
             <Box
               key={specialty._id}
               sx={{
@@ -42,10 +43,18 @@ const Specialist = async () => {
                   padding: "40px 10px",
                 },
               }}
+
+              component={Link}
+              href={`/doctors?specialties=${specialty.title}`}
             >
-             {
-              specialty?.icon &&  <Image src={specialty.icon} width="100" height="100" alt="icon" />
-             }
+              {specialty?.icon && (
+                <Image
+                  src={specialty.icon}
+                  width="100"
+                  height="100"
+                  alt="icon"
+                />
+              )}
 
               <Box>
                 <Typography fontWeight={600} mt={2}>
